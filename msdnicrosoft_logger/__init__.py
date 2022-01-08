@@ -1,7 +1,6 @@
-import console
-import file
+from . import console
 
-class Log:
+class Logger:
     def __init__(self,Console=True,File=False):
         self.console = Console
         self.file = File
@@ -10,30 +9,35 @@ class Log:
         if self.console:
             console.info(i)
         if self.file:
+            from . import file
             file.info(i)
     
     def warn(self,i):
         if self.console:
             console.warn(i)
         if self.file:
+            from . import file
             file.warn(i)
 
     def error(self,i):
         if self.console:
             console.error(i)
         if self.file:
+            from . import file
             file.error(i)
 
     def debug(self,i):
         if self.console:
             console.debug(i)
         if self.file:
+            from . import file
             file.debug(i)
 
     def fatal(self,i):
         if self.console:
             console.fatal(i)
         if self.file:
+            from . import file
             file.fatal(i)
 
 if __name__=='__main__':
