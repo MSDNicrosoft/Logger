@@ -3,8 +3,12 @@
 ---
 Eg:
 ```python
-from msdnicrosoft_logger import logger
+import msdnicrosoft_logger
 logger = logger.Log(Console=True,File=True)
-#... Enter your code there
+# Args:
+# Console :: Output messages to Console
+#
+# File :: Output messages to files
+# ... Enter your code there
 ```
 
