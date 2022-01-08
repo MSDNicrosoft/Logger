@@ -4,7 +4,7 @@
 Eg:
 ```python
 import msdnicrosoft_logger
-logger = logger.Log(Console=True,File=True)
+logger = msdnicrosoft_logger.Logger(Console=True,File=True)
 # Args:
 # Console :: Output messages to Console
 #
