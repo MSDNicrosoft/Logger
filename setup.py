@@ -2,7 +2,7 @@
 from setuptools import find_packages, setup
 
 ### Package MetaData ###
-NAME = "msdnicrosoft-logger"
+NAME = "msdnicrosoft_logger"
 DESCRIPTION = "自己手写的 logger"
 URL = "https://github.com/MSDNicrosoft/logger"
 EMAIL = 'wang3311835119@hotmail.com'

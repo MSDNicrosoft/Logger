@@ -3,7 +3,7 @@
 ---
 Eg:
 ```python
-from msdnicrosoft-logger import logger
+from msdnicrosoft_logger import logger
 logger = logger.Log(Console=True,File=True)
 #... Enter your code there
 ```
