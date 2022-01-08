@@ -12,7 +12,7 @@ VERSION = '0.0.1'
 REQUIRED = ['colorama>=0.4.4']
 
 try:
-    with open('README.md','r', encoding='utf-8') as desc:
+    with open('README.md','r',encoding='utf-8') as desc:
         long_description = desc.read()
 except FileNotFoundError:
     long_description = DESCRIPTION
