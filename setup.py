@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*- #
 from setuptools import find_packages, setup
 
-### Package MetaData ###
+### Package Metadata ###
 NAME = "msdnicrosoft_logger"
 DESCRIPTION = "自己手写的 logger"
 URL = "https://github.com/MSDNicrosoft/logger"
@@ -38,6 +38,5 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent"
-        
     ]
 )
