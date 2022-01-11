@@ -1,6 +1,6 @@
 from . import console
 
-class Logger:
+class Log:
     def __init__(self,Console=True,File=False):
         self.console = Console
         self.file = File
