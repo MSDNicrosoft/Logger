@@ -1,48 +1,95 @@
-from . import console
+from time import strftime
+from colorama import init
+
+init(autoreset=True)
+
+
+class Console:
+    sColorSuffix = "\033[0m"
+
+    def info(Message):
+        print(strftime(f"[%Z-%H:%M:%S][\033[32mINFO{Console.sColorSuffix}]: {Message}"))
+
+    def warn(Message):
+        print(strftime(f"[%Z-%H:%M:%S][\033[33mWARN{Console.sColorSuffix}]: {Message}"))
+
+    def error(Message):
+        print(strftime(f"[%Z-%H:%M:%S][\033[31mERROR{Console.sColorSuffix}]: {Message}"))
+
+    def fatal(Message):
+        print(strftime(f"[%Z-%H:%M:%S][\033[1;31;47mFATAL{Console.sColorSuffix}]: {Message}"))
+
+    def debug(Message):
+        print(strftime(f"[%Z-%H:%M:%S][\033[34mDEBUG{Console.sColorSuffix}]: {Message}"))
+
+
+class File:
+    def __init__(self, FileName):
+        self.FileName = FileName
+        self.Operate = open(strftime(self.FileName), 'a', encoding='utf-8')
+
+    def info(self, Message):
+        self.Operate.write(strftime(f"[%Z-%H:%M:%S][INFO]: {Message}\n"))
+
+    def warn(self, Message):
+        self.Operate.write(strftime(f"[%Z-%H:%M:%S][WARN]: {Message}\n"))
+
+    def error(self, Message):
+        self.Operate.write(strftime(f"[%Z-%H:%M:%S][ERROR]: {Message}\n"))
+
+    def fatal(self, Message):
+        self.Operate.write(strftime(f"[%Z-%H:%M:%S][FATAL]: {Message}\n"))
+
+    def debug(self, Message):
+        self.Operate.write(strftime(f"[%Z-%H:%M:%S][DEBUG]: {Message}\n"))
+
 
 class Log:
-    def __init__(self,Console=True,File=False):
-        self.console = Console
-        self.file = File
+    def __init__(self, Shell=True, LogFile=False, FileName="%Y-%m-%d_%H-%M.log"):
+        self.LogFileName = FileName
+        self.shell = Shell
+        self.file = LogFile
 
-    def info(self,i):
-        if self.console:
-            console.info(i)
+    def info(self, Message):
+        if self.shell:
+            Console.info(Message)
         if self.file:
-            from . import file
-            file.info(i)
-    
-    def warn(self,i):
-        if self.console:
-            console.warn(i)
-        if self.file:
-            from . import file
-            file.warn(i)
+            file = File(FileName=self.LogFileName)
+            file.info(Message)
 
-    def error(self,i):
-        if self.console:
-            console.error(i)
+    def warn(self, Message):
+        if self.shell:
+            Console.warn(Message)
         if self.file:
-            from . import file
-            file.error(i)
+            file = File(FileName=self.LogFileName)
+            file.warn(Message)
 
-    def debug(self,i):
-        if self.console:
-            console.debug(i)
+    def error(self, Message):
+        if self.shell:
+            Console.error(Message)
         if self.file:
-            from . import file
-            file.debug(i)
+            file = File(FileName=self.LogFileName)
+            file.error(Message)
 
-    def fatal(self,i):
-        if self.console:
-            console.fatal(i)
+    def fatal(self, Message):
+        if self.shell:
+            Console.fatal(Message)
         if self.file:
-            from . import file
-            file.fatal(i)
+            file = File(FileName=self.LogFileName)
+            file.fatal(Message)
 
-if __name__=='__main__':
+    def debug(self, Message):
+        if self.shell:
+            Console.debug(Message)
+        if self.file:
+            file = File(FileName=self.LogFileName)
+            file.debug(Message)
+
+
+if __name__ == '__main__':
     from time import sleep
-    logger = Log(File=True)
+
+    logger = Log(LogFile=True)
     logger.info("这是一条正常消息")
     sleep(1)
     logger.warn("这是一条警告消息")
