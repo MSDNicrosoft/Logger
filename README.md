@@ -2,7 +2,9 @@
 >不喜勿喷
 ---
 ## Getting Started:
-`pip install msdnicrosoft_logger`
+```bash
+pip install msdnicrosoft_logger
+```
 
 ## Example:
 ```python
