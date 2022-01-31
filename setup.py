@@ -17,8 +17,6 @@ try:
 except FileNotFoundError:
     long_description = DESCRIPTION
 
-
-
 setup(
     name=NAME,
     version=VERSION,
