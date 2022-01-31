@@ -8,7 +8,7 @@ URL = "https://github.com/MSDNicrosoft/logger"
 EMAIL = "wang3311835119@hotmail.com"
 AUTHOR = "MSDNicrosoft"
 REQUIRES_PYTHON = ">=3.6.0"
-VERSION = "0.0.5"
+VERSION = "0.0.6"
 REQUIRED = ["colorama>=0.4.4"]
 
 try:
