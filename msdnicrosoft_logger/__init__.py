@@ -2,6 +2,11 @@ from time import strftime
 from colorama import init
 
 
+__all__ = [
+    "Log"
+]
+
+
 class Log:
     """
     参数:\n
@@ -32,14 +37,16 @@ class Log:
     `%Z`      **当前时区的名称**\n
     `%%`      **%号本身**
     """
+
     def __init__(self,
                  Shell=True,
                  LogFile=False,
                  FileName="%Y-%m-%d_%H-%M.log"
                  ):
-        self.LogFileName = FileName
         self.shell = Shell
         self.file = LogFile
+        self.LogFileName = FileName
+
 
     def info(self, Message):
         if self.shell:
@@ -127,6 +134,7 @@ class File:
     """
     This class can output messages to file
     """
+
     def __init__(self, FileName):
         self.FileName = FileName
         self.File = open(
@@ -169,9 +177,6 @@ class File:
                 f"[%H:%M:%S][DEBUG]: {Message}\n"
             )
         )
-
-
-
 
 
 if __name__ == '__main__':
