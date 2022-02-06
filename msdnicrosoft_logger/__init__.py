@@ -1,7 +1,6 @@
 from time import strftime
 from colorama import init
 
-
 __all__ = [
     "Log"
 ]
@@ -12,7 +11,8 @@ class Log:
     参数:\n
     `Shell` -- 是否输出消息 -> 控制台 (Default：True) | Boolean\n
     `LogFile` -- 是否输出消息 -> 文件 (Default: False) | Boolean\n
-    `FileName`[已使用格式化时间] -- 输出文件名（仅 LogFile=True 时此参数有效）（Default：%Y-%m-%d_%H-%M.log） | String\n
+    `FileName` [已使用格式化时间] -- 输出文件名（仅 LogFile=True 时此参数有效）（Default：%Y-%m-%d_%H-%M.log） | String\n
+    `FileName` 请注意符合对应操作系统的文件命名要求\n
     格式化时间请参照如下方：\n
     `%y`      **两位数的年份表示（00-99）**\n
     `%Y`      **四位数的年份表示（000-9999）**\n
@@ -46,7 +46,6 @@ class Log:
         self.shell = Shell
         self.file = LogFile
         self.LogFileName = FileName
-
 
     def info(self, Message):
         if self.shell:
