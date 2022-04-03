@@ -13,6 +13,6 @@ pip install msdnicrosoft_logger
 ```python
 import msdnicrosoft_logger
 logger = msdnicrosoft_logger.Log(Shell=True,LogFile=True,FileName="%Y-%m-%d_%H-%M.log")
-# ... Enter your code there
+# ... Enter your code here
 ```
 
