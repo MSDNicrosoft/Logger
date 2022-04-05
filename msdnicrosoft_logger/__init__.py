@@ -1,5 +1,4 @@
 from time import strftime
-from colorama import init
 
 __all__ = [
     "Log"
@@ -9,33 +8,10 @@ __all__ = [
 class Log:
     """
     参数:\n
-    `Shell` -- 是否输出消息 -> 控制台 (Default：True) | Boolean\n
-    `LogFile` -- 是否输出消息 -> 文件 (Default: False) | Boolean\n
-    `FileName` [已使用格式化时间] -- 输出文件名（仅 LogFile=True 时此参数有效）（Default：%Y-%m-%d_%H-%M.log） | String\n
-    `FileName` 请注意符合对应操作系统的文件命名要求\n
-    格式化时间请参照如下方：\n
-    `%y`      两位数的年份表示（00-99）\n
-    `%Y`      四位数的年份表示（000-9999）\n
-    `%m`      月份（01-12）\n
-    `%d`      月内中的一天（0-31）\n
-    `%H`      24 小时制小时数（0-23）\n
-    `%I`      12 小时制小时数（01-12）\n
-    `%M`      分钟数（00=59）\n
-    `%S`      秒（00-59）\n
-    `%a`      本地简化星期名称\n
-    `%A`      本地完整星期名称\n
-    `%b`      本地简化的月份名称\n
-    `%B`      本地完整的月份名称\n
-    `%c`      本地相应的日期表示和时间表示\n
-    `%j`      年内的一天（001-366）\n
-    `%p`      本地 A.M. 或 P.M. 的等价符\n
-    `%U`      一年中的星期数（00-53），星期天为星期的开始\n
-    `%w`      星期（0-6），星期天为星期的开始\n
-    `%W`      一年中的星期数（00-53），星期一为星期的开始\n
-    `%x`      本地相应的日期表示\n
-    `%X`      本地相应的时间表示\n
-    `%Z`      当前时区的名称\n
-    `%%`      %号本身
+    Shell -- 是否输出消息 -> 控制台 (Default：True) | Boolean\n
+    LogFile -- 是否输出消息 -> 文件 (Default: False) | Boolean\n
+    FileName [已使用格式化时间] -- 输出文件名（仅 LogFile=True 时此参数有效）（Default：%Y-%m-%d_%H-%M.log） | String\n
+    FileName 请注意符合对应操作系统的文件命名要求\n
     """
 
     def __init__(self,
@@ -43,48 +19,51 @@ class Log:
                  LogFile=False,
                  FileName="%Y-%m-%d_%H-%M.log"
                  ):
-        self.shell = Shell
-        self.file = LogFile
-        self.LogFileName = FileName
+        self.Shell = Shell
+        self.LogFile = LogFile
+        self.FileName = FileName
 
     def info(self, Message):
-        if self.shell:
+        if self.Shell:
             Console.info(Message)
-        if self.file:
-            file = File(FileName=self.LogFileName)
+        if self.LogFile:
+            file = File(FileName=self.FileName)
             file.info(Message)
 
-    def warn(self, Message):
-        if self.shell:
-            Console.warn(Message)
-        if self.file:
-            file = File(FileName=self.LogFileName)
-            file.warn(Message)
+    def warning(self, Message):
+        if self.Shell:
+            Console.warning(Message)
+        if self.LogFile:
+            file = File(FileName=self.FileName)
+            file.warning(Message)
 
     def error(self, Message):
-        if self.shell:
+        if self.Shell:
             Console.error(Message)
-        if self.file:
-            file = File(FileName=self.LogFileName)
+        if self.LogFile:
+            file = File(FileName=self.FileName)
             file.error(Message)
 
     def fatal(self, Message):
-        if self.shell:
+        if self.Shell:
             Console.fatal(Message)
-        if self.file:
-            file = File(FileName=self.LogFileName)
+        if self.LogFile:
+            file = File(FileName=self.FileName)
             file.fatal(Message)
 
     def debug(self, Message):
-        if self.shell:
+        if self.Shell:
             Console.debug(Message)
-        if self.file:
-            file = File(FileName=self.LogFileName)
+        if self.LogFile:
+            file = File(FileName=self.FileName)
             file.debug(Message)
 
 
 class Console:
-    """This class can output colored messages to Shell"""
+    """
+    This class can output colored messages to Shell.
+    """
+    from colorama import init
     sColorSuffix = "\033[0m"
     init(autoreset=True)
 
@@ -97,7 +76,7 @@ class Console:
         )
 
     @staticmethod
-    def warn(Message):
+    def warning(Message):
         print(
             strftime(
                 f"[%H:%M:%S] [\033[33mWARN{Console.sColorSuffix}]: {Message}"
@@ -131,20 +110,14 @@ class Console:
 
 class File:
     """
-    This class can output messages to file
+    This class can output messages to file.
     """
 
     def __init__(self, FileName):
-        self.FileName = FileName
-        self.File = open(
-            strftime(self.FileName),
-            "a",
-            encoding="utf-8"
-        )
+        self.File = open(strftime(FileName), "a", encoding="utf-8")
 
     def __del__(self):
         self.File.close()
-
 
     def info(self, Message):
         self.File.write(
@@ -153,7 +126,7 @@ class File:
             )
         )
 
-    def warn(self, Message):
+    def warning(self, Message):
         self.File.write(
             strftime(
                 f"[%H:%M:%S] [WARN]: {Message}\n"
@@ -188,7 +161,7 @@ if __name__ == '__main__':
     logger = Log(LogFile=True)
     logger.info("这是一条正常消息")
     sleep(1)
-    logger.warn("这是一条警告消息")
+    logger.warning("这是一条警告消息")
     sleep(2)
     logger.error("这是一条错误消息")
     sleep(3)
